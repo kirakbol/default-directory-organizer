@@ -13,7 +13,7 @@ def files(path):
         if os.path.isfile(os.path.join(path, file)):
             if not file[0] == '.':
                 fileList.append(file)
-                os.rename(file, '.' + file)
+                os.rename(os.path.join(path,file),os.path.join(path, '.' + file))
     return fileList
 
 class MyHandler(FileSystemEventHandler):

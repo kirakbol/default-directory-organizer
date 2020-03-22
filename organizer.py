@@ -18,12 +18,14 @@ def files(path):
                 os.rename(file, '.' + file)
     return fileList
 
+class MyHandler(FileSystemEventHandler):
+    def on_modified(self, event):
+        files(path)
+
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO,
-                        format='%(asctime)s - %(message)s',
-                        datefmt='%Y-%m-%d %H:%M:%S')
+    event_handler = MyHandler()
     path = sys.argv[1] if len(sys.argv) > 1 else '.'
     files(path)
     event_handler = LoggingEventHandler()

@@ -27,7 +27,6 @@ class MyHandler(FileSystemEventHandler):
 if __name__ == "__main__":
     event_handler = MyHandler()
     path = sys.argv[1] if len(sys.argv) > 1 else '.'
-    files(path)
     event_handler = LoggingEventHandler()
     observer = Observer()
     observer.schedule(event_handler, path, recursive=True)

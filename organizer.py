@@ -23,10 +23,15 @@ class MyHandler(FileSystemEventHandler):
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO,
+                        format='%(asctime)s - %(message)s',
+                        datefmt='%Y-%m-%d %H:%M:%S')
     event_handler = MyHandler()
+    event_handler2 = LoggingEventHandler()
     path = sys.argv[1] if len(sys.argv) > 1 else '.'
     observer = Observer()
     observer.schedule(event_handler, path, recursive=True)
+    observer.schedule(event_handler2, path, recursive=True)
     observer.start()
     try:
         while True:
@@ -34,5 +39,3 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         observer.stop()
     observer.join()
-
-
